@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\SnakeHead.cs" />
+     <Compile Include="Assets\PlayerController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Ohjelmat/Unity3d/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
