@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeHead : MonoBehaviour {
-	private int health = 500;
-	private float tailDistance = (float) 0.003;
+	private int health = 20;
+	private float tailDistance = (float) 0.12;
 	private float speed;
 	private bool moving;
 
@@ -14,9 +14,9 @@ public class SnakeHead : MonoBehaviour {
 
 	private Vector3 prevPosition;
 
-	private GameObject AddTailPiece (GameObject following)
+	private GameObject AddTailPiece (GameObject following, Vector3 position)
 	{
-		GameObject newTail = Instantiate (snakeTailPrefab, transform.position, transform.rotation);
+		GameObject newTail = Instantiate (snakeTailPrefab, position, transform.rotation);
 		SnakeTail newScript = newTail.GetComponent<SnakeTail> ();
 		newScript.FollowedObject = following;
 		newScript.SnakeHeadScript = this;
@@ -57,10 +57,12 @@ public class SnakeHead : MonoBehaviour {
 
 		GameObject following = this.gameObject;
 		tailList = new List<SnakeTail> ();
+		Vector3 position = transform.position;
 
 		for (int i = 0; i < health; i++)
 		{
-			following = AddTailPiece (following);
+			position.x -= tailDistance;
+			following = AddTailPiece (following, position);
 		}
 	}
 	

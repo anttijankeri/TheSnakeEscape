@@ -6,6 +6,7 @@ public class SnakeTail : MonoBehaviour {
 	private GameObject followedObject;
 	private SnakeHead snakeHead;
 	private float followDistance;
+	private Vector3 followedPrevPosition;
 
 	public GameObject FollowedObject
 	{
@@ -45,24 +46,29 @@ public class SnakeTail : MonoBehaviour {
 
 	private void FollowTarget ()
 	{
-		Vector3 posDifference = new Vector3 (0, 0, 0);
-		posDifference = FollowedObject.transform.position - transform.position;
-		float len = posDifference.magnitude;
-		if (SnakeHeadScript.Moving || len > FollowDistance)
+		if (snakeHead.Moving)
 		{
+			Vector3 posDifference = followedObject.transform.position - transform.position;
+
+			Vector3 transition = followedObject.transform.position - followedPrevPosition;
+
+			float frameSpeed = (posDifference.magnitude / followDistance) * snakeHead.Speed * Time.deltaTime;
+
+			posDifference -= (transition / transition.magnitude) * (followDistance / 2);
+
 			float radAngle = Mathf.Atan2 (posDifference.y, posDifference.x);
 
 			transform.eulerAngles = new Vector3 (0, 0, radAngle * Mathf.Rad2Deg);
 
-			float frameSpeed = Mathf.Min (len - FollowDistance, SnakeHeadScript.Speed * Time.deltaTime);
-
 			transform.position += new Vector3 (Mathf.Cos (radAngle) * frameSpeed, Mathf.Sin (radAngle) * frameSpeed, 0);
+
+			followedPrevPosition = followedObject.transform.position;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		
+		followedPrevPosition = followedObject.transform.position;
 	}
 	
 	// Update is called once per frame
