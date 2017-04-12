@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SnakeTail : MonoBehaviour {
 	private GameObject followedObject;
+	private int tailNumber;
 	private SnakeHead snakeHead;
 	private float followDistance;
 	private Vector3 followedPrevPosition;
@@ -29,6 +30,18 @@ public class SnakeTail : MonoBehaviour {
 		set
 		{
 			this.snakeHead = value;
+		}
+	}
+
+	public int TailNumber
+	{
+		get
+		{
+			return this.tailNumber;
+		}
+		set
+		{
+			this.tailNumber = value;
 		}
 	}
 
