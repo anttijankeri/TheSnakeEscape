@@ -135,7 +135,7 @@ public class SnakeHead : MonoBehaviour {
 		if (other.gameObject.GetComponent<EnemyNPC> ())
 		{
 			Destroy (other.gameObject);
-			AddHeal (3);
+			AddHeal (1);
 		}
 	}
 

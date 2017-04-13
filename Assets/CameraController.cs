@@ -5,19 +5,22 @@ using UnityEngine;
 /// Moves the camera relative to the player.
 /// </summary>
 public class CameraController : MonoBehaviour {
-
-    public GameObject player;
-    private Vector3 offset;
+    private GameObject player;
 
 	// Use this for initialization
 	void Start ()
     {
-        offset = transform.position - player.transform.position;
+		player = GameObject.Find ("SnakeHead");
+
+		float aspectRatio = (float) Screen.width / ((float) Screen.height * (1 - InventoryController.inventoryPortion));
+		Camera.main.aspect = aspectRatio;
+
+		Camera.main.pixelRect = new Rect (0, InventoryController.inventoryPortion * Screen.height, (float) 1 * Screen.width, (float) 1 * Screen.height);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        transform.position = player.transform.position + offset;
+		transform.position = player.transform.position + new Vector3 (0, 0, -10);
 	}
 }
