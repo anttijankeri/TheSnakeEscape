@@ -7,6 +7,8 @@ public class dialogueHolder : MonoBehaviour {
     public string dialogue;
     private dialogueManager dMAn;
 
+    public string[] dialogueLines;
+
     /// <summary>
     /// Loads dialogueManager in the start of every scene
     /// </summary>
@@ -30,7 +32,15 @@ public class dialogueHolder : MonoBehaviour {
         {
             if (Input.GetMouseButtonUp(0))
             {
-                dMAn.ShowBox(dialogue);
+                //dMAn.ShowBox(dialogue);
+
+                //If dialogue is not active, reset the lines back to zero.
+                if (!dMAn.dialogueActive)
+                {
+                    dMAn.dialogLines = dialogueLines;
+                    dMAn.currentLine = 0;
+                    dMAn.ShowDialogue();
+                }
             }
         }
     }

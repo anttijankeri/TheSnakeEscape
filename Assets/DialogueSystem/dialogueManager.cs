@@ -10,6 +10,9 @@ public class dialogueManager : MonoBehaviour {
     public Text dialogueText;
     public bool dialogueActive;
 
+    public string[] dialogLines;
+    public int currentLine;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -20,10 +23,23 @@ public class dialogueManager : MonoBehaviour {
         //Input.GetMouseButtonDown(0) tai Input.GetKeyDown(KeyCode.Space)
         if (dialogueActive && Input.GetMouseButtonDown(0))
         {
+            //dialogueBox.SetActive(false);
+            //dialogueActive = false;
+
+            currentLine++;
+        }
+
+        if (currentLine >= dialogLines.Length)
+        {
             dialogueBox.SetActive(false);
             dialogueActive = false;
+
+            currentLine = 0;
         }
-	}
+
+        dialogueText.text = dialogLines[currentLine];
+
+    }
 
     /// <summary>
     /// Sets dBox and dActive to true
@@ -35,5 +51,11 @@ public class dialogueManager : MonoBehaviour {
         dialogueActive = true;
         dialogueBox.SetActive(true);
         dialogueText.text = dialogue;
+    }
+
+    public void ShowDialogue()
+    {
+        dialogueActive = true;
+        dialogueBox.SetActive(true);
     }
 }
