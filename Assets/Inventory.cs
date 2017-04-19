@@ -3,9 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory {
+	private List<Item> itemList;
 
-	public void EatLead ()
+	public Inventory ()
 	{
-		Debug.Log ("REEEEEEEEEEEEEEEEEEE");
+		itemList = new List<Item> ();
+	}
+
+	public int ItemTotal
+	{
+		get
+		{
+			return 0;
+		}
+	}
+
+	public Sprite GetSprite (int itemNumber)
+	{
+		return itemList [itemNumber].ItemSprite;
 	}
 }
