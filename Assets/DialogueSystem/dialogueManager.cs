@@ -29,14 +29,16 @@ public class dialogueManager : MonoBehaviour {
             currentLine++;
         }
 
+        //Closes the conversation after the array ends
         if (currentLine >= dialogLines.Length)
         {
+            //Closes dialogue boxes
             dialogueBox.SetActive(false);
             dialogueActive = false;
 
+            //Sets the current line to the beginning
             currentLine = 0;
         }
-
         dialogueText.text = dialogLines[currentLine];
 
     }
