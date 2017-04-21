@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour {
 	{
 		SceneManager.LoadSceneAsync (gameController.sceneList [1]);
 		Destroy (GameObject.Find ("InventoryCanvas"));
-		Destroy (GameController.gameController);
 	}
 
 	public void PauseUnPauseGame ()
@@ -81,6 +80,11 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (SceneManager.GetActiveScene ().name == "GameOver")
+		{
+			Destroy (GameController.gameController.gameObject);
+		}
+
 		if (timerStarted && !GameController.gamePaused)
 		{
 			timeLimit -= Time.deltaTime;
