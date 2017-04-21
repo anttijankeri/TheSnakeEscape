@@ -235,6 +235,7 @@ public class SnakeHead : MonoBehaviour {
 			// destroy the enemy NPC and heal for one.
 			Destroy (other.gameObject);
 			AddHeal (1);
+			GameController.StartTimer ();
 		}
 	}
 
@@ -271,6 +272,11 @@ public class SnakeHead : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (health <= 0)
+		{
+			GameController.GameOver ();
+		}
+
 		// save the snakehead's speed for this frame
 		Speed = playerController.GetRealSpeed ();
 

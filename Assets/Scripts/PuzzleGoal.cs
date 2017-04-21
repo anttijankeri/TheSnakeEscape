@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PuzzleGoal : MonoBehaviour {
 	private bool colliding = false;
@@ -22,6 +21,11 @@ public class PuzzleGoal : MonoBehaviour {
 	public void ShowSelf ()
 	{
 		gameObject.GetComponent<Renderer> ().enabled = true;
+	}
+
+	public void HideSelf ()
+	{
+		gameObject.GetComponent<Renderer> ().enabled = false;
 	}
 
 	public bool Unlocked

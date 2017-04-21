@@ -16,18 +16,10 @@ public class Item {
 		sprite = (Sprite) Resources.Load ("Sprites/Items/" + this.itemName, typeof(Sprite));
 	}
 
-	public void ArmPuzzleItem (string puzzleGoal)
+	public void ArmPuzzleItem ()
 	{
 		this.puzzleItem = true;
-		this.puzzleGoalName = puzzleGoal;
-	}
-
-	public bool IsPuzzleItem
-	{
-		get
-		{
-			return this.puzzleItem;
-		}
+		this.puzzleGoalName = "PuzzleGoal" + itemName;
 	}
 
 	public Sprite ItemSprite
@@ -49,7 +41,6 @@ public class Item {
 				switch (itemName) {
 				case "Key":
 					puzzleGoalScript.Unlocked = true;
-					Debug.Log ("status: " + puzzleGoalScript.Unlocked);
 					break;
 
 				case "TetrisBlue":
@@ -58,6 +49,7 @@ public class Item {
 				case "TetrisRed":
 				case "TetrisOrange":
 					puzzleGoalScript.ShowSelf ();
+					puzzleGoalScript.Unlocked = true;
 					break;
 				}
 
