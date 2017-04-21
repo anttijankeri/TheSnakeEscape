@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 	{
 		SceneManager.LoadSceneAsync (gameController.sceneList [1]);
 		Destroy (GameObject.Find ("InventoryCanvas"));
-		Destroy (gameController.gameObject);
+		Destroy (GameController.gameController);
 	}
 
 	public void PauseUnPauseGame ()
