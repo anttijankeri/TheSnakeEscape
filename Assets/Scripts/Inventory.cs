@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Inventory {
 	private List<Item> itemList;
+	private static Inventory inventory;
+	private Dictionary<string, bool> itemTypes;
 
 	public Inventory ()
 	{
+		inventory = this;
+
 		itemList = new List<Item> ();
 
-		AddItem (new Item ());
-		AddItem (new Item ());
-		AddItem (new Item ("Key", false));
-		AddItem (new Item ());
-		AddItem (new Item ("Cherry"));
-		AddItem (new Item ("TetrisBlue"));
-		AddItem (new Item ("TetrisYellow"));
-		AddItem (new Item ("TetrisRed"));
-		AddItem (new Item ("TetrisOrange"));
-		AddItem (new Item ("TetrisPurple"));
-		AddItem (new Item ());
+		itemTypes = new Dictionary<string, bool> ();
+		itemTypes.Add ("Apple", false);
+		itemTypes.Add ("Cherry", false);
+		itemTypes.Add ("Key", true);
+		itemTypes.Add ("TetrisBlue", true);
+		itemTypes.Add ("TetrisYellow", true);
+		itemTypes.Add ("TetrisRed", true);
+		itemTypes.Add ("TetrisPurple", true);
+		itemTypes.Add ("TetrisOrange", true);
 	}
 
 	public int ItemTotal
@@ -30,14 +32,19 @@ public class Inventory {
 		}
 	}
 
-	public void AddItem (Item item)
+	public static void AddItem (string itemName)
 	{
-		itemList.Add (item);
+		Item item = new Item (itemName);
+		inventory.itemList.Add (item);
+		if (inventory.itemTypes [itemName])
+		{
+			item.ArmPuzzleItem ();
+		}
 	}
 
 	public void UseItem (int itemNumber)
 	{
-		if (!itemList [itemNumber].PuzzleItem)
+		if (itemList [itemNumber].Use ())
 		{
 			itemList.RemoveAt (itemNumber);
 		}
