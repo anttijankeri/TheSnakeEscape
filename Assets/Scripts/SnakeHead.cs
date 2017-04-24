@@ -7,10 +7,10 @@ using UnityEngine;
 /// </summary>
 public class SnakeHead : MonoBehaviour {
 	// snake's remaining health = how many tail sections left, 0 = game over
-	private int health = 20;
+	private int health;
 
 	// distance in unity units between tail pieces
-	private float tailDistance = (float) 0.125;
+	private float tailDistance = (float) 0.12;
 
 	// the speed of the snake, taken from the player controller
 	private float speed;
@@ -235,12 +235,14 @@ public class SnakeHead : MonoBehaviour {
 			// destroy the enemy NPC and heal for one.
 			Destroy (other.gameObject);
 			AddHeal (1);
-			GameController.StartTimer ();
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
+		// get the remaining health
+		health = GameController.playerHealth;
+
 		// get the player controller script and save it
 		playerController = this.gameObject.GetComponent<PlayerController> ();
 

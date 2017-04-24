@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour {
 	// time limit in seconds for how long the player has until gameover
 	private float timeLimit = 125;
 
+	// player's starting health, and current health when switching scenes
+	public static int playerHealth = 10;
+
 	// bool for checking if the countdown has started yet (timer starts inside the queen's house once the battery app has been talked to)
 	private bool timerStarted = false;
 
@@ -51,6 +54,9 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public static void AdvanceScene ()
 	{
+		// save the player's current health for loading in the new scene
+		playerHealth = GameObject.Find("SnakeHead").GetComponent<SnakeHead> ().Health;
+
 		// loads the next scene from the list
 		SceneManager.LoadSceneAsync (gameController.sceneList [gameController.activeSceneNumber + 1]);
 	}
@@ -117,7 +123,7 @@ public class GameController : MonoBehaviour {
 		// add ALL the scenes in the game to the list
 		sceneList.Add ("MainMenu");
 		sceneList.Add ("GameOver");
-		sceneList.Add ("Scene1");
+		sceneList.Add ("GameWorld1");
 		/*
 		sceneList.Add ("Scene2");
 		sceneList.Add ("Scene3");

@@ -68,6 +68,9 @@ public class Inventory {
 			// turn the item into a puzzle item (cannot be used outside puzzlegoals)
 			item.ArmPuzzleItem ();
 		}
+
+		// update the inventory buttons
+		GameObject.Find("InventoryCanvas").GetComponent<InventoryController> ().UpdateButtons ();
 	}
 
 	/// <summary>
