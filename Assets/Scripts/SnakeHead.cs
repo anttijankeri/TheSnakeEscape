@@ -272,8 +272,10 @@ public class SnakeHead : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// check if player's health went too low (= we deadededed)
 		if (health <= 0)
 		{
+			// end the game
 			GameController.GameOver ();
 		}
 

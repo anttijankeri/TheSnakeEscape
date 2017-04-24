@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Goal object the player has to be colliding with to use the right puzzle item
+/// </summary>
 public class PuzzleGoal : MonoBehaviour {
+	// if the player is currently colliding with this object
 	private bool colliding = false;
+
+	// is this puzzle solved/unlocked (=> player used the right item on top of the puzzlegoal)
 	private bool unlocked = false;
 
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="PuzzleGoal"/> is colliding with the player.
+	/// </summary>
+	/// <value><c>true</c> if colliding; otherwise, <c>false</c>.</value>
 	public bool Colliding
 	{
 		get
@@ -18,16 +28,28 @@ public class PuzzleGoal : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Start showing self
+	/// </summary>
 	public void ShowSelf ()
 	{
+		// turn on the gameobject's renderer
 		gameObject.GetComponent<Renderer> ().enabled = true;
 	}
 
+	/// <summary>
+	/// Start hiding self
+	/// </summary>
 	public void HideSelf ()
 	{
+		// turn off the gameobject's renderer
 		gameObject.GetComponent<Renderer> ().enabled = false;
 	}
 
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="PuzzleGoal"/> is unlocked => solved
+	/// </summary>
+	/// <value><c>true</c> if unlocked; otherwise, <c>false</c>.</value>
 	public bool Unlocked
 	{
 		set
@@ -70,11 +92,7 @@ public class PuzzleGoal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// turn off the renderer at startup
 		gameObject.GetComponent<Renderer> ().enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
