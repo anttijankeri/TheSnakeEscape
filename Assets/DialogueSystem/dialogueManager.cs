@@ -39,7 +39,11 @@ public class dialogueManager : MonoBehaviour {
             //Sets the current line to the beginning
             currentLine = 0;
         }
-        dialogueText.text = dialogLines[currentLine];
+        //
+        if (dialogueActive)
+        {
+            dialogueText.text = dialogLines[currentLine];   
+        }
 
     }
 

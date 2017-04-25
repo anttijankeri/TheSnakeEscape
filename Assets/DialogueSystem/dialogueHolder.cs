@@ -6,14 +6,13 @@ public class dialogueHolder : MonoBehaviour {
 
     public string dialogue;
     private dialogueManager dMAn;
-
     public string[] dialogueLines;
 
     /// <summary>
     /// Loads dialogueManager in the start of every scene
     /// </summary>
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         dMAn = FindObjectOfType<dialogueManager>();
 	}
 	
