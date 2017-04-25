@@ -264,8 +264,9 @@ public class SnakeHead : MonoBehaviour {
 		// create tail pieces equal to total health
 		for (int i = 0; i < health; i++)
 		{
-			// move the creation spot left equal to the distance between tail sections
-			position.x -= tailDistance / 5;
+			// move the creation spot backwards a bit
+			position.x -= (tailDistance / 2) * Mathf.Cos (Mathf.Deg2Rad * transform.eulerAngles.z);
+			position.y -= (tailDistance / 2) * Mathf.Sin (Mathf.Deg2Rad * transform.eulerAngles.z);
 
 			// create the new tail piece
 			following = AddTailPiece (following, position, transform.rotation, i);
