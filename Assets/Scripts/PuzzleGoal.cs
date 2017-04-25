@@ -71,8 +71,17 @@ public class PuzzleGoal : MonoBehaviour {
 		// check if the collider is the player
 		if (other.gameObject.GetComponent<SnakeHead> ())
 		{
-			// change colliding value
-			this.colliding = true;
+			// check if regular puzzle goal (no items needed)
+			if (gameObject.name == "PuzzleGoal")
+			{
+				unlocked = true;
+			}
+			// need items
+			else
+			{
+				// change colliding value
+				this.colliding = true;
+			}
 		}
 	}
 
