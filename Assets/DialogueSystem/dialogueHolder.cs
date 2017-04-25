@@ -7,7 +7,7 @@ public class dialogueHolder : MonoBehaviour {
     public string dialogue;
     private dialogueManager dMAn;
     public string[] dialogueLines;
-	public bool dialogueUsed = false;
+	private bool dialogueUsed = false;
 
     /// <summary>
     /// Loads dialogueManager in the start of every scene
@@ -30,7 +30,7 @@ public class dialogueHolder : MonoBehaviour {
     {
         if (other.gameObject.name == "SnakeHead")
         {
-            if (Input.GetMouseButtonUp(0))
+            if (!Input.GetMouseButton(0))
             {
                 //dMAn.ShowBox(dialogue);
 
