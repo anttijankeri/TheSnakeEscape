@@ -265,7 +265,7 @@ public class SnakeHead : MonoBehaviour {
 		for (int i = 0; i < health; i++)
 		{
 			// move the creation spot left equal to the distance between tail sections
-			position.x -= tailDistance;
+			position.x -= tailDistance / 5;
 
 			// create the new tail piece
 			following = AddTailPiece (following, position, transform.rotation, i);
