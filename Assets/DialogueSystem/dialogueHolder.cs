@@ -7,6 +7,7 @@ public class dialogueHolder : MonoBehaviour {
     public string dialogue;
     private dialogueManager dMAn;
     public string[] dialogueLines;
+	public bool dialogueUsed = false;
 
     /// <summary>
     /// Loads dialogueManager in the start of every scene
@@ -34,11 +35,12 @@ public class dialogueHolder : MonoBehaviour {
                 //dMAn.ShowBox(dialogue);
 
                 //If dialogue is not active, reset the lines back to zero.
-                if (!dMAn.dialogueActive)
+				if (!dialogueManager.dialogueActive && !dialogueUsed)
                 {
                     dMAn.dialogLines = dialogueLines;
                     dMAn.currentLine = 0;
                     dMAn.ShowDialogue();
+					dialogueUsed = true;
                 }
             }
         }
