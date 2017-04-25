@@ -124,15 +124,13 @@ public class GameController : MonoBehaviour {
 		sceneList.Add ("MainMenu");
 		sceneList.Add ("GameOver");
 		sceneList.Add ("GameWorld1");
-		/*
-		sceneList.Add ("Scene2");
-		sceneList.Add ("Scene3");
-		sceneList.Add ("Scene4");
-		sceneList.Add ("Scene5");
-		sceneList.Add ("Scene6");
-		sceneList.Add ("Scene7");
-		sceneList.Add ("Scene8");
-		*/
+		sceneList.Add ("GameWorld2");
+		sceneList.Add ("GameWorld3");
+		sceneList.Add ("GameWorld4");
+		sceneList.Add ("GameWorld5");
+		sceneList.Add ("GameWorld6");
+		sceneList.Add ("GameWorld7");
+		sceneList.Add ("GameWorld8");
 	}
 
 	// Update is called once per frame
