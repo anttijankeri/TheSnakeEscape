@@ -100,26 +100,26 @@ public class NPCPathing : MonoBehaviour {
 					if (posDifference.magnitude <= frameSpeed) {
 						currentWaypoint++;
 
-						UpdateNextWaypoint ();
-
 						// if at the end of the path
-						if (currentWaypoint + 1 == waypointList.Count) {
+						if (currentWaypoint == waypointList.Count) {
 							// if need to loop
 							if (looping) {
 								currentWaypoint = 0;
 							}
-						// no looping, stop moving
-						else {
+							// no looping, stop moving
+							else {
 								moving = false;
 
 								return;
 							}
 						}
+
+						UpdateNextWaypoint ();
 					}
-				// not moved past waypoint, reduce distance left
-				else {
-						// reduce the position difference total
-						posDifference -= thisSpeed * posDifference.normalized;
+					// not moved past waypoint, reduce distance left
+					else {
+							// reduce the position difference total
+							posDifference -= thisSpeed * posDifference.normalized;
 					}
 
 					// reduce the remaining speed

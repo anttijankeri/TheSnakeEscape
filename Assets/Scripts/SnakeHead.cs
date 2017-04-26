@@ -232,9 +232,13 @@ public class SnakeHead : MonoBehaviour {
 		// check if the collider is an enemy
 		if (other.gameObject.GetComponent<EnemyNPC> ())
 		{
-			// destroy the enemy NPC and heal for one.
-			Destroy (other.gameObject);
-			AddHeal (1);
+			// check if the enemy can be killed
+			if (!other.GetComponent<EnemyNPC> ().unkillable)
+			{
+				// destroy the enemy NPC and heal for one.
+				Destroy (other.gameObject);
+				AddHeal (1);
+			}
 		}
 	}
 
