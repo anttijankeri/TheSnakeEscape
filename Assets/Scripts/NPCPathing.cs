@@ -39,7 +39,7 @@ public class NPCPathing : MonoBehaviour {
 	private void OnDrawGizmosSelected ()
 	{
 		// if no waypoints dont do anything
-		if (waypointList == null)
+		if (waypointList.Count > 0)
 		{
 			return;
 		}
@@ -73,9 +73,12 @@ public class NPCPathing : MonoBehaviour {
 
 	void Start ()
 	{
-		startPos = transform.position;
+		if (waypointList.Count > 0)
+		{
+			startPos = transform.position;
 
-		UpdateNextWaypoint ();
+			UpdateNextWaypoint ();
+		}
 	}
 
 	// Update is called once per frame
