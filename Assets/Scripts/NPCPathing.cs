@@ -21,10 +21,17 @@ public class NPCPathing : MonoBehaviour {
 	private List<Waypoint> waypointList;
 
 	// if the NPC should keep moving or not
-	private bool finishedMoving = false;
+	[SerializeField]
+	public bool moving = false;
 
 	// the last waypoint the NPC touched
 	private int currentWaypoint = 0;
+
+	// the positional difference between current pos and the next waypoint
+	private Vector3 posDifference;
+
+	// the starting position of the object, used for calculating local pos differences
+	private Vector3 startPos;
 
 	/// <summary>
 	/// Draws the waypoints to help with placing them
@@ -52,29 +59,72 @@ public class NPCPathing : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the next waypoint's coordinates and stuff
+	/// </summary>
+	private void UpdateNextWaypoint ()
+	{
+		// get the next waypoint (either the first waypoint if at the last, or just the next waypoint)
+		Vector3 nextWPPos = (currentWaypoint + 1 == waypointList.Count) ? waypointList [0].position : waypointList [currentWaypoint + 1].position;
+
+		// calculate the positional difference between the current and targeted spots
+		posDifference = nextWPPos - (transform.position - startPos);
+	}
+
+	void Start ()
+	{
+		startPos = transform.position;
+
+		UpdateNextWaypoint ();
+	}
+
 	// Update is called once per frame
 	void Update () {
-		// check if theres waypoints to move to
-		if (waypointList != null && !finishedMoving)
-		{
-			// get the speed for this frame
-			float frameSpeed = speed * Time.deltaTime;
+		// if not paused
+		if (!GameController.gamePaused) {
+			// check if theres waypoints to move to
+			if (waypointList != null && moving) {
+				// get the speed for this frame
+				float frameSpeed = speed * Time.deltaTime;
 
-			// keep moving until the speed for this frame is exhausted
-			// (if the speed is really high or the waypoints are really close, we may need to move past multiple waypoints)
-			while (frameSpeed > 0)
-			{
-				// get the next waypoint (either the first waypoint if at the last, or just the next waypoint)
-				Vector3 nextWPPos = (currentWaypoint + 1 == waypointList.Count) ? waypointList [0].position : waypointList [currentWaypoint + 1].position;
+				// keep moving until the speed for this frame is exhausted
+				// (if the speed is really high or the waypoints are really close, we may need to move past multiple waypoints)
+				while (frameSpeed > 0) {
+					// get the distance to move towards the goal position
+					float thisSpeed = Mathf.Min (frameSpeed, posDifference.magnitude);
 
-				// calculate the positional difference between the current and targeted spots
-				Vector3 posDifference = nextWPPos - transform.position;
+					// move towards the goal
+					transform.position += thisSpeed * posDifference.normalized;
 
-				// get the distance to move towards the goal position
-				float thisSpeed = Mathf.Min(frameSpeed, posDifference.magnitude);
+					// change to the next waypoint if moved past it
+					if (posDifference.magnitude <= frameSpeed) {
+						currentWaypoint++;
 
-				// move towards the goal
-				transform.position += frameSpeed * posDifference.normalized;
+						UpdateNextWaypoint ();
+
+						// if at the end of the path
+						if (currentWaypoint + 1 == waypointList.Count) {
+							// if need to loop
+							if (looping) {
+								currentWaypoint = 0;
+							}
+						// no looping, stop moving
+						else {
+								moving = false;
+
+								return;
+							}
+						}
+					}
+				// not moved past waypoint, reduce distance left
+				else {
+						// reduce the position difference total
+						posDifference -= thisSpeed * posDifference.normalized;
+					}
+
+					// reduce the remaining speed
+					frameSpeed -= thisSpeed;
+				}
 			}
 		}
 	}
