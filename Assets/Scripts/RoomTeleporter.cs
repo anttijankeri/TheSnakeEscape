@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 /// <summary>
 /// Teleports the player to the given scene if all the puzzlegoals in the room are solved
 /// </summary>
@@ -15,6 +16,10 @@ public class RoomTeleporter : MonoBehaviour {
 	// how often the puzzle goals are checked for completion, and the current cooldown for the check
 	private float checkCooldownRate = 1;
 	private float checkCooldown = 0;
+
+	// should the teleporter start drawing when open?
+	[SerializeField]
+	private bool drawOnOpen = false;
 
 	/// <summary>
 	/// Collision event for player
@@ -69,6 +74,12 @@ public class RoomTeleporter : MonoBehaviour {
 
 			// save the open status to the correct value
 			open = allPuzzlesUnlocked;
+
+			// start rendering if needed
+			if (open && drawOnOpen)
+			{
+				GetComponent<Renderer> ().enabled = true;
+			}
 
 			// start the check cooldown again
 			checkCooldown = checkCooldownRate;

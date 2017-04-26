@@ -12,6 +12,10 @@ public class PuzzleGoal : MonoBehaviour {
 	// is this puzzle solved/unlocked (=> player used the right item on top of the puzzlegoal)
 	private bool unlocked = false;
 
+	// if the puzzle should be shown when unlocked
+	[SerializeField]
+	private bool showOnUnlock = false;
+
 	/// <summary>
 	/// Gets or sets a value indicating whether this <see cref="PuzzleGoal"/> is colliding with the player.
 	/// </summary>
@@ -29,24 +33,6 @@ public class PuzzleGoal : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Start showing self
-	/// </summary>
-	public void ShowSelf ()
-	{
-		// turn on the gameobject's renderer
-		gameObject.GetComponent<Renderer> ().enabled = true;
-	}
-
-	/// <summary>
-	/// Start hiding self
-	/// </summary>
-	public void HideSelf ()
-	{
-		// turn off the gameobject's renderer
-		gameObject.GetComponent<Renderer> ().enabled = false;
-	}
-
-	/// <summary>
 	/// Gets or sets a value indicating whether this <see cref="PuzzleGoal"/> is unlocked => solved
 	/// </summary>
 	/// <value><c>true</c> if unlocked; otherwise, <c>false</c>.</value>
@@ -55,6 +41,12 @@ public class PuzzleGoal : MonoBehaviour {
 		set
 		{
 			unlocked = value;
+
+			// show/hide if necessary
+			if (unlocked)
+			{
+				GetComponent<Renderer> ().enabled = showOnUnlock;
+			}
 		}
 		get
 		{
@@ -97,11 +89,5 @@ public class PuzzleGoal : MonoBehaviour {
 			// turn the puzzlegoal's collision off
 			this.colliding = false;
 		}
-	}
-
-	// Use this for initialization
-	void Start () {
-		// turn off the renderer at startup
-		gameObject.GetComponent<Renderer> ().enabled = false;
 	}
 }

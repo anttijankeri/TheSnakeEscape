@@ -72,28 +72,8 @@ public class Item {
 			// check if the puzzlegoal is currently colliding with the player/snake head
 			if (puzzleGoalScript.Colliding == true)
 			{
-				// change the puzzle goal based on the item
-				switch (itemName) {
-
-				// key object
-				case "Key":
-					// only unlocking the puzzlegoal
-					puzzleGoalScript.Unlocked = true;
-					break;
-
-				// all tetris objects
-				case "TetrisBlue":
-				case "TetrisYellow":
-				case "TetrisPurple":
-				case "TetrisRed":
-				case "TetrisOrange":
-					// show the puzzlegoal (supposed to be a tetris piece put in the correct place)
-					puzzleGoalScript.ShowSelf ();
-
-					// unlock the puzzlegoal
-					puzzleGoalScript.Unlocked = true;
-					break;
-				}
+				// unlock the puzzle
+				puzzleGoalScript.Unlocked = true;
 
 				// item was used
 				return true;
