@@ -131,6 +131,7 @@ public class GameController : MonoBehaviour {
 		sceneList.Add ("GameWorld6");
 		sceneList.Add ("GameWorld7");
 		sceneList.Add ("GameWorld8");
+		sceneList.Add ("GameWorld9");
 	}
 
 	// Update is called once per frame
