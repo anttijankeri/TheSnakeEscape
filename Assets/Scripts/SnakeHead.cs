@@ -10,7 +10,7 @@ public class SnakeHead : MonoBehaviour {
 	private int health;
 
 	// distance in unity units between tail pieces
-	private float tailDistance = (float) 0.09;
+	private float tailDistance = (float) 0.06;
 
 	// the speed of the snake, taken from the player controller
 	private float speed;

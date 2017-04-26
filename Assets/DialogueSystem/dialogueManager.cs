@@ -47,18 +47,9 @@ public class dialogueManager : MonoBehaviour {
 		dialogueBox.SetActive(false);
 	}
 
-    /// <summary>
-    /// Sets dBox and dActive to true
-    /// and sets dText to dialogue
-    /// </summary>
-    /// <param name="dialogue"></param>
-    public void ShowBox(string dialogue)
-    {
-        dialogueManager.dialogueActive = true;
-        dialogueBox.SetActive(true);
-        dialogueText.text = dialogue;
-    }
-
+	/// <summary>
+	/// Activates the dialogue box
+	/// </summary>
     public void ShowDialogue()
     {
         dialogueManager.dialogueActive = true;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class dialogueHolder : MonoBehaviour {
 
-    public string dialogue;
     private dialogueManager dMAn;
     public string[] dialogueLines;
 	private bool dialogueUsed = false;
