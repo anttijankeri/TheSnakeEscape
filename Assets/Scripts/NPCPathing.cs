@@ -15,9 +15,17 @@ public class NPCPathing : MonoBehaviour {
 	[SerializeField]
 	private float speed;
 
+	// if the enemy NPC regains eyesight after finishing path
+	[SerializeField]
+	private bool regainEyesight;
+
 	// if the NPC should keep moving or not
 	[SerializeField]
-	public bool moving = false;
+	public bool moving;
+
+	// should the NPC self destruct after finishing the path
+	[SerializeField]
+	private bool selfDestruct;
 
 	// a list containing all the waypoints, waypoints are relative to current position
 	// the first waypoint MUST ALWAYS BE 0, 0, 0
@@ -39,7 +47,7 @@ public class NPCPathing : MonoBehaviour {
 	private void OnDrawGizmosSelected ()
 	{
 		// if no waypoints dont do anything
-		if (waypointList.Count > 0)
+		if (waypointList.Count == 0)
 		{
 			return;
 		}
@@ -86,7 +94,7 @@ public class NPCPathing : MonoBehaviour {
 		// if not paused
 		if (!GameController.gamePaused) {
 			// check if theres waypoints to move to
-			if (waypointList != null && moving) {
+			if (waypointList.Count > 0 && moving) {
 				// get the speed for this frame
 				float frameSpeed = speed * Time.deltaTime;
 
@@ -100,21 +108,32 @@ public class NPCPathing : MonoBehaviour {
 					transform.position += thisSpeed * posDifference.normalized;
 
 					// change to the next waypoint if moved past it
-					if (posDifference.magnitude <= frameSpeed) {
+					if (posDifference.magnitude <= frameSpeed)
+					{
 						currentWaypoint++;
 
 						// if at the end of the path
 						if (currentWaypoint == waypointList.Count) {
-							// if need to loop
-							if (looping) {
-								currentWaypoint = 0;
+							currentWaypoint = 0;
+						}
+						// no looping, at the end
+						else if (currentWaypoint + 1 == waypointList.Count)
+						{
+							// self destruct if necessary
+							if (selfDestruct)
+							{
+								GameObject.Destroy (gameObject);
 							}
-							// no looping, stop moving
-							else {
-								moving = false;
 
-								return;
+							moving = false;
+
+							// regain eyesight to chase enemies
+							if (GetComponent<EnemyNPC> () && regainEyesight)
+							{
+								GetComponent<EnemyNPC> ().blind = false;
 							}
+
+							return;
 						}
 
 						UpdateNextWaypoint ();
