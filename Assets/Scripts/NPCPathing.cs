@@ -15,14 +15,14 @@ public class NPCPathing : MonoBehaviour {
 	[SerializeField]
 	private float speed;
 
+	// if the NPC should keep moving or not
+	[SerializeField]
+	public bool moving = false;
+
 	// a list containing all the waypoints, waypoints are relative to current position
 	// the first waypoint MUST ALWAYS BE 0, 0, 0
 	[SerializeField]
 	private List<Waypoint> waypointList;
-
-	// if the NPC should keep moving or not
-	[SerializeField]
-	public bool moving = false;
 
 	// the last waypoint the NPC touched
 	private int currentWaypoint = 0;
