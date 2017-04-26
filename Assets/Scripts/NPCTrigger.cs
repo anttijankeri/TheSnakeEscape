@@ -11,6 +11,16 @@ public class NPCTrigger : MonoBehaviour {
 	[SerializeField]
 	private string triggeredObjectName;
 
+	// timer for how long until the npc starts moving after the trigger fires
+	[SerializeField]
+	private float triggerTimer = 0;
+
+	// if the trigger has been triggered
+	private bool triggered = false;
+
+	// time elapsed since triggering
+	private float triggerTimeGone = 0;
+
 	/// <summary>
 	/// When triggering with the player
 	/// </summary>
@@ -20,11 +30,28 @@ public class NPCTrigger : MonoBehaviour {
 		// check if the trigger is the player
 		if (other.gameObject.name == "SnakeHead")
 		{
-			// trigger the npc's movement
-			GameObject.Find (triggeredObjectName).GetComponent<NPCPathing> ().moving = true;
+			// start the trigger
+			triggered = true;
+		}
+	}
 
-			// self destruct
-			GameObject.Destroy (gameObject);
+	void Update ()
+	{
+		// if the trigger has fired
+		if (triggered)
+		{
+			// reduce time left
+			triggerTimeGone += Time.deltaTime;
+
+			// check if time is up
+			if (triggerTimeGone >= triggerTimer)
+			{
+				// trigger the npc's movement
+				GameObject.Find (triggeredObjectName).GetComponent<NPCPathing> ().moving = true;
+
+				// self destruct
+				GameObject.Destroy (gameObject);
+			}
 		}
 	}
 }
