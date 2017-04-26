@@ -29,18 +29,13 @@ public class dialogueHolder : MonoBehaviour {
     {
         if (other.gameObject.name == "SnakeHead")
         {
-            if (!Input.GetMouseButton(0))
+            //If dialogue is not active, reset the lines back to zero.
+			if (!dialogueManager.dialogueActive && !dialogueUsed)
             {
-                //dMAn.ShowBox(dialogue);
-
-                //If dialogue is not active, reset the lines back to zero.
-				if (!dialogueManager.dialogueActive && !dialogueUsed)
-                {
-                    dMAn.dialogLines = dialogueLines;
-                    dMAn.currentLine = 0;
-                    dMAn.ShowDialogue();
-					dialogueUsed = true;
-                }
+                dMAn.dialogLines = dialogueLines;
+                dMAn.currentLine = 0;
+                dMAn.ShowDialogue();
+				dialogueUsed = true;
             }
         }
     }
