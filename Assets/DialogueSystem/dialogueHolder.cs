@@ -2,11 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+/// <summary>
+/// Contains a single set of dialogue that is sent to the manager when triggered
+/// </summary>
 public class dialogueHolder : MonoBehaviour {
-
+	// the actual dialogue manager
     private dialogueManager dMAn;
+
+	// if the holder should wait until the room teleporter is open => all puzzles solved
+	[SerializeField]
+	private bool waitUntilOpen = false;
+
+	// list of dialogue lines
     public string[] dialogueLines;
+
+	// if the dialogue has been triggered yet
 	private bool dialogueUsed = false;
+
+	// if the dialogue manager should repeat lines after the first lines have been shown => add to this array
+	// the lines shown when repeating
+	[SerializeField]
+	private string[] repeatLines;
 
     /// <summary>
     /// Loads dialogueManager in the start of every scene
@@ -25,17 +42,38 @@ public class dialogueHolder : MonoBehaviour {
     /// then show dialoguebox from dialogueManager
     /// </summary>
     /// <param name="other"></param>
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
+		// if the collider is the player
         if (other.gameObject.name == "SnakeHead")
         {
-            //If dialogue is not active, reset the lines back to zero.
-			if (!dialogueManager.dialogueActive && !dialogueUsed)
+            //If dialogue is not active, give the manager its lines if necessary
+			if (!dialogueManager.dialogueActive)
             {
-                dMAn.dialogLines = dialogueLines;
-                dMAn.currentLine = 0;
-                dMAn.ShowDialogue();
-				dialogueUsed = true;
+				// exit if room teleporter isnt open and we're waiting for it to open
+				if (waitUntilOpen)
+				{
+					if (!GameObject.Find("RoomTeleporter").GetComponent<RoomTeleporter> ().Open)
+					{
+						return;
+					}
+				}
+
+				// if not shown anything from this holder yet
+				if (!dialogueUsed)
+				{
+					dMAn.dialogLines = dialogueLines;
+					dMAn.currentLine = 0;
+					dMAn.ShowDialogue();
+					dialogueUsed = true;
+				}
+				// if theres any repeatable lines to show
+				else if (repeatLines.Length > 0)
+				{
+					dMAn.dialogLines = repeatLines;
+					dMAn.currentLine = 0;
+					dMAn.ShowDialogue();
+				}
             }
         }
     }

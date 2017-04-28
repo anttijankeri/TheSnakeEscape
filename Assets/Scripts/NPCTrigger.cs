@@ -15,6 +15,10 @@ public class NPCTrigger : MonoBehaviour {
 	[SerializeField]
 	private float triggerTimer = 0;
 
+	// whether the trigger should wait until the room teleporter is open == all puzzles solved
+	[SerializeField]
+	private bool waitUntilOpen = false;
+
 	// if the trigger has been triggered
 	private bool triggered = false;
 
@@ -30,6 +34,15 @@ public class NPCTrigger : MonoBehaviour {
 		// check if the trigger is the player
 		if (other.gameObject.name == "SnakeHead")
 		{
+			// exit if all puzzles not yet solved and need to wait for it
+			if (waitUntilOpen)
+			{
+				if (!GameObject.Find("RoomTeleporter").GetComponent<RoomTeleporter> ().Open)
+				{
+					return;
+				}
+			}
+
 			// start the trigger
 			triggered = true;
 		}
