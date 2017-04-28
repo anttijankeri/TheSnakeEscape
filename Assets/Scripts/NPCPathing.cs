@@ -117,7 +117,7 @@ public class NPCPathing : MonoBehaviour {
 							currentWaypoint = 0;
 						}
 						// no looping, at the end
-						else if (currentWaypoint + 1 == waypointList.Count)
+						else if (currentWaypoint + 1 == waypointList.Count && !looping)
 						{
 							// self destruct if necessary
 							if (selfDestruct)
