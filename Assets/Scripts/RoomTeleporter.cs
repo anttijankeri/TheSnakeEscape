@@ -22,6 +22,18 @@ public class RoomTeleporter : MonoBehaviour {
 	private bool drawOnOpen = false;
 
 	/// <summary>
+	/// Gets whether the room teleporter is open or not.
+	/// </summary>
+	/// <value><c>true</c> if open; otherwise, <c>false</c>.</value>
+	public bool Open
+	{
+		get
+		{
+			return open;
+		}
+	}
+
+	/// <summary>
 	/// Collision event for player
 	/// </summary>
 	/// <param name="other">Collider other.</param>
