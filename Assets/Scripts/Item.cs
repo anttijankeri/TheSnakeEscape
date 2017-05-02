@@ -66,24 +66,25 @@ public class Item {
 		// check if the item is a puzzle item
 		if (this.puzzleItem)
 		{
-			// find the correct puzzlegoal's script object
-			PuzzleGoal puzzleGoalScript = GameObject.Find (puzzleGoalName).GetComponent<PuzzleGoal> ();
-
-			// check if the puzzlegoal is currently colliding with the player/snake head
-			if (puzzleGoalScript.Colliding == true)
+			// check if there's a correct type of puzzle in the scene
+			if (GameObject.Find(puzzleGoalName))
 			{
-				// unlock the puzzle
-				puzzleGoalScript.Unlocked = true;
+				// find the correct puzzlegoal's script object
+				PuzzleGoal puzzleGoalScript = GameObject.Find (puzzleGoalName).GetComponent<PuzzleGoal> ();
 
-				// item was used
-				return true;
+				// check if the puzzlegoal is currently colliding with the player/snake head
+				if (puzzleGoalScript.Colliding == true)
+				{
+					// unlock the puzzle
+					puzzleGoalScript.Unlocked = true;
+
+					// item was used
+					return true;
+				}
 			}
 			// not colliding with the correct puzzlegoal
-			else
-			{
-				// item was not used
-				return false;
-			}
+			// item was not used
+			return false;
 		}
 		// not a puzzle item => item can be used freely
 		else

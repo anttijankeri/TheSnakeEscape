@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class GameController : MonoBehaviour {
 	// time limit in seconds for how long the player has until gameover
-	private float timeLimit = 125;
+	private float timeLimit = 1800;
 
 	// player's starting health, and current health when switching scenes
 	public static int playerHealth = 10;

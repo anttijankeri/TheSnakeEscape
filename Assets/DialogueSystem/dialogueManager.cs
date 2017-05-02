@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Shows and controls all the dialogue boxes
+/// </summary>
 public class dialogueManager : MonoBehaviour {
     //Dialogue box
     public GameObject dialogueBox;
     //Dialogue text
     public Text dialogueText;
+
+	// if the dialogue window is currently active
     public static bool dialogueActive = false;
 
+	// list of lines given by the dialogue holders
     public string[] dialogLines;
     public int currentLine;
 

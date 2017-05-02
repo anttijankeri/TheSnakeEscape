@@ -36,6 +36,7 @@ public class Inventory {
 		itemTypes.Add ("TetrisRed", true);
 		itemTypes.Add ("TetrisPurple", true);
 		itemTypes.Add ("TetrisOrange", true);
+		itemTypes.Add ("PictureFrame", true);
 	}
 
 	/// <summary>
