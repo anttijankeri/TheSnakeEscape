@@ -30,6 +30,9 @@ public class Inventory {
 		itemTypes = new Dictionary<string, bool> ();
 		itemTypes.Add ("Apple", false);
 		itemTypes.Add ("Cherry", false);
+		itemTypes.Add ("Bomb", false);
+		itemTypes.Add ("Redbull", false);
+		itemTypes.Add ("CalcBomb", true);
 		itemTypes.Add ("Key", true);
 		itemTypes.Add ("TetrisBlue", true);
 		itemTypes.Add ("TetrisYellow", true);
