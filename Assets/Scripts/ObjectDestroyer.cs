@@ -30,6 +30,14 @@ public class ObjectDestroyer : MonoBehaviour {
 	private float triggerTimeGone = 0;
 
 	/// <summary>
+	/// Instantly triggers the object destroyer to start ticking.
+	/// </summary>
+	public void TriggerDestroyer ()
+	{
+		triggered = true;
+	}
+
+	/// <summary>
 	/// When triggering with the player
 	/// </summary>
 	/// <param name="other">Other.</param>
