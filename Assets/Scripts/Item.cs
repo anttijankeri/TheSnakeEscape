@@ -103,6 +103,18 @@ public class Item {
 				// find the snakehead object and give it lots of healing
 				GameObject.Find ("SnakeHead").GetComponent<SnakeHead> ().AddHeal (4);
 				break;
+
+			// redbull, increase speed and turnrate
+			case "RedBull":
+				// find the player controlloer and boost it
+				GameObject.Find ("SnakeHead").GetComponent<PlayerController> ().ActivateBoost (2.5f, 2.5f, 10);
+				break;
+
+			// bomb, create explosion without wallhacks
+			case "Bomb":
+				// create the explosion at the snakehead position
+				new Explosion (5, false, GameObject.Find ("SnakeHead").transform.position);
+				break;
 			}
 
 			// item was used successfully
