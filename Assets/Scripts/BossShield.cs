@@ -12,6 +12,10 @@ public class BossShield : MonoBehaviour {
 	[SerializeField]
 	private string[] objectNameList;
 
+	// dialogue trigger name
+	[SerializeField]
+	private string dialogueTriggerName = "";
+
 	// update frequency, how many seconds between each check
 	[SerializeField]
 	private float updateFrequency = 1;
@@ -31,12 +35,19 @@ public class BossShield : MonoBehaviour {
 				if (GameObject.Find (objectName) != null)
 				{
 					// object found, shield still active
+					timeLeftToUpdate = updateFrequency;
 					return;
 				}
 			}
 
 			// no objects found -> shield should be removed
 			GetComponent<EnemyNPC> ().unkillable = false;
+
+			// trigger some dialogue if necessary
+			if (dialogueTriggerName != "")
+			{
+				DialogueTrigger.TriggerDialogue (dialogueTriggerName);
+			}
 
 			// destroy component
 			Destroy (this);

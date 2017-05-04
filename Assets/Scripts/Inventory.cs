@@ -31,7 +31,7 @@ public class Inventory {
 		itemTypes.Add ("Apple", false);
 		itemTypes.Add ("Cherry", false);
 		itemTypes.Add ("Bomb", false);
-		itemTypes.Add ("Redbull", false);
+		itemTypes.Add ("RedBull", false);
 		itemTypes.Add ("CalcBomb", true);
 		itemTypes.Add ("Key", true);
 		itemTypes.Add ("TetrisBlue", true);
