@@ -16,6 +16,10 @@ public class PuzzleGoal : MonoBehaviour {
 	[SerializeField]
 	private bool showOnUnlock = false;
 
+	// dialogue trigger name
+	[SerializeField]
+	private string dialogueTriggerName = "";
+
 	/// <summary>
 	/// Gets or sets a value indicating whether this <see cref="PuzzleGoal"/> is colliding with the player.
 	/// </summary>
@@ -46,6 +50,12 @@ public class PuzzleGoal : MonoBehaviour {
 			if (unlocked)
 			{
 				GetComponent<Renderer> ().enabled = showOnUnlock;
+
+				// trigger some dialogue if necessary
+				if (dialogueTriggerName != "")
+				{
+					DialogueTrigger.TriggerDialogue (dialogueTriggerName);
+				}
 			}
 		}
 		get

@@ -19,6 +19,10 @@ public class NPCTrigger : MonoBehaviour {
 	[SerializeField]
 	private bool waitUntilOpen = false;
 
+	// dialogue trigger name
+	[SerializeField]
+	private string dialogueTriggerName = "";
+
 	// if the trigger has been triggered
 	private bool triggered = false;
 
@@ -61,6 +65,12 @@ public class NPCTrigger : MonoBehaviour {
 			{
 				// trigger the npc's movement
 				GameObject.Find (triggeredObjectName).GetComponent<NPCPathing> ().moving = true;
+
+				// trigger some dialogue if necessary
+				if (dialogueTriggerName != "")
+				{
+					DialogueTrigger.TriggerDialogue (dialogueTriggerName);
+				}
 
 				// self destruct
 				GameObject.Destroy (gameObject);
