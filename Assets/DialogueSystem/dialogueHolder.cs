@@ -25,6 +25,10 @@ public class dialogueHolder : MonoBehaviour {
 	[SerializeField]
 	private string[] repeatLines;
 
+	// bool for if the repeatlines are on cooldown (=> false = can use repeatlines)
+	// bool resets to false when exiting the dialogue zone.
+	private bool repeatCD = false;
+
     /// <summary>
     /// Loads dialogueManager in the start of every scene
     /// </summary>
@@ -32,11 +36,7 @@ public class dialogueHolder : MonoBehaviour {
     void Start () {
         dMAn = FindObjectOfType<dialogueManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
     /// <summary>
     /// If player collides with the text box collider,
     /// then show dialoguebox from dialogueManager
@@ -66,15 +66,33 @@ public class dialogueHolder : MonoBehaviour {
 					dMAn.currentLine = 0;
 					dMAn.ShowDialogue();
 					dialogueUsed = true;
+					repeatCD = true;
 				}
 				// if theres any repeatable lines to show
-				else if (repeatLines.Length > 0)
+				else if (repeatLines.Length > 0 && !repeatCD)
 				{
 					dMAn.dialogLines = repeatLines;
 					dMAn.currentLine = 0;
 					dMAn.ShowDialogue();
+					repeatCD = true;
 				}
             }
         }
     }
+
+	/// <summary>
+	/// Collision exit with player
+	/// The OnTriggerEnter/Exit functions are somewhat bugged
+	/// since they trigger twice in a row when entering or exiting the trigger zone
+	/// </summary>
+	/// <param name="other">Collider Other.</param>
+	void OnTriggerExit (Collider other)
+	{
+		// if the collider is the player
+		if (other.gameObject.name == "SnakeHead")
+		{
+			// reset the repeat cooldown
+			repeatCD = false;
+		}
+	}
 }
