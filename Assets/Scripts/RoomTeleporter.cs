@@ -21,6 +21,10 @@ public class RoomTeleporter : MonoBehaviour {
 	[SerializeField]
 	private bool drawOnOpen = false;
 
+	// dialogue trigger name
+	[SerializeField]
+	private string dialogueTriggerName = "";
+
 	/// <summary>
 	/// Gets whether the room teleporter is open or not.
 	/// </summary>
@@ -87,10 +91,20 @@ public class RoomTeleporter : MonoBehaviour {
 			// save the open status to the correct value
 			open = allPuzzlesUnlocked;
 
-			// start rendering if needed
-			if (open && drawOnOpen)
+			// if room teleporter is now unlocked
+			if (open)
 			{
-				GetComponent<Renderer> ().enabled = true;
+				// trigger some dialogue if necessary
+				if (dialogueTriggerName != "")
+				{
+					DialogueTrigger.TriggerDialogue (dialogueTriggerName);
+				}
+
+				// start rendering if needed
+				if (drawOnOpen)
+				{
+					GetComponent<Renderer> ().enabled = true;
+				}
 			}
 
 			// start the check cooldown again
