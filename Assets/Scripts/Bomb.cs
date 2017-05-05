@@ -34,17 +34,17 @@ public class Bomb : MonoBehaviour {
 				new Explosion (bombRadius, false, transform.position);
 
 				// change sprite to explosion
-				GetComponent<SpriteRenderer> ().sprite = (Sprite) Resources.Load ("Sprites/WorldSprites/Bomb_explosion", typeof(Sprite));
+				GetComponent<SpriteRenderer> ().sprite = (Sprite)Resources.Load ("Sprites/WorldSprites/Bomb_explosion", typeof(Sprite));
 			}
-			// bomb has exploded, count down until explosion should disappear
-			else
-			{
-				explosionTimeLeft -= Time.deltaTime;
+		}
+		// bomb has exploded, count down until explosion should disappear
+		else
+		{
+			explosionTimeLeft -= Time.deltaTime;
 
-				if (explosionTimeLeft <= 0)
-				{
-					Destroy (gameObject);
-				}
+			if (explosionTimeLeft <= 0)
+			{
+				Destroy (gameObject);
 			}
 		}
 	}
