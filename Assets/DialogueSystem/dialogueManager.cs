@@ -45,6 +45,15 @@ public class dialogueManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Turn off self-destruct on scene changes
+	/// </summary>
+	void Awake ()
+	{
+		// make the gameobject persistent
+		DontDestroyOnLoad (transform.parent.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 		// add listener to dialogue button

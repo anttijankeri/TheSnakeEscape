@@ -41,7 +41,7 @@ public class ObjectDestroyer : MonoBehaviour {
 	/// When triggering with the player
 	/// </summary>
 	/// <param name="other">Other.</param>
-	void OnTriggerEnter (Collider other)
+	void OnTriggerStay (Collider other)
 	{
 		// check if the trigger is the player
 		if (other.gameObject.name == "SnakeHead")

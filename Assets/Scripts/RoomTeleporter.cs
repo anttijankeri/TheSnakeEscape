@@ -15,7 +15,7 @@ public class RoomTeleporter : MonoBehaviour {
 
 	// how often the puzzle goals are checked for completion, and the current cooldown for the check
 	private float checkCooldownRate = 1;
-	private float checkCooldown = 0;
+	private float checkCooldown = 1;
 
 	// should the teleporter start drawing when open?
 	[SerializeField]

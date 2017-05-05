@@ -57,8 +57,10 @@ public class GameController : MonoBehaviour {
 		// save the player's current health for loading in the new scene
 		playerHealth = GameObject.Find("SnakeHead").GetComponent<SnakeHead> ().Health;
 
+		gameController.activeSceneNumber++;
+
 		// loads the next scene from the list
-		SceneManager.LoadSceneAsync (gameController.sceneList [gameController.activeSceneNumber + 1]);
+		SceneManager.LoadScene (gameController.sceneList [gameController.activeSceneNumber]);
 	}
 
 	/// <summary>
@@ -71,6 +73,9 @@ public class GameController : MonoBehaviour {
 
 		// destroy the inventory canvas and all its children (= the whole inventory system)
 		Destroy (GameObject.Find ("InventoryCanvas"));
+
+		// destroy the dialogue canvas
+		Destroy (GameObject.Find ("DialogueCanvas"));
 	}
 
 	/// <summary>
