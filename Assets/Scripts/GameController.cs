@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[System.Serializable]
 /// <summary>
 /// Game controller for controlling the game's rooms etc
 /// Spawned in at the start of the first level and not destroyed on scene changes
@@ -34,8 +35,11 @@ public class GameController : MonoBehaviour {
 	// 0 = main menu
 	// 1 = game over
 	// 2 - 9 the actual gameworld scenes
+	// 10 victory screen
 	private List<string> sceneList;
-	private int activeSceneNumber;
+
+	[SerializeField]
+	private int activeSceneNumber = 2;
 
 	/// <summary>
 	/// Starts the timelimit countdown
@@ -107,9 +111,6 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// set the active scene to the first gameworld scene
-		activeSceneNumber = 2;
-
 		// save the gamecontroller static variable to this script
 		gameController = this;
 
@@ -136,11 +137,21 @@ public class GameController : MonoBehaviour {
 		sceneList.Add ("GameWorld6");
 		sceneList.Add ("GameWorld7");
 		sceneList.Add ("GameWorld8");
-		sceneList.Add ("GameWorld9");
+		sceneList.Add ("Victory");
 	}
 
 	// Update is called once per frame
 	void Update () {
+		// if in the victory screen
+		if (SceneManager.GetActiveScene ().name == sceneList[10])
+		{
+			// destroy the inventory canvas and all its children (= the whole inventory system)
+			Destroy (GameObject.Find ("InventoryCanvas"));
+
+			// destroy the dialogue canvas
+			Destroy (GameObject.Find ("DialogueCanvas"));
+		}
+
 		// check if in the mainmenu or gameover scenes for self-destruction
 		if (SceneManager.GetActiveScene ().name == sceneList[0] || SceneManager.GetActiveScene ().name == sceneList[1])
 		{

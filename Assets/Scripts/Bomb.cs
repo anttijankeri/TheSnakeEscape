@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Bomb : MonoBehaviour {
 	// total timer for the bomb to explode
-	private float timeLeft = 4;
+	private float timeLeft = 3;
 
 	// if the bomb has exploded already
 	private bool exploded = false;
