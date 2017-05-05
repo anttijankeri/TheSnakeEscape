@@ -110,10 +110,10 @@ public class Item {
 				GameObject.Find ("SnakeHead").GetComponent<PlayerController> ().ActivateBoost (2.5f, 2.5f, 10);
 				break;
 
-			// bomb, create explosion without wallhacks
+			// bomb, create a bomb
 			case "Bomb":
-				// create the explosion at the snakehead position
-				new Explosion (5, false, GameObject.Find ("SnakeHead").transform.position);
+				// create the bomb at the snakehead position
+				GameObject.Instantiate(Resources.Load ("Prefabs/Bomb") as GameObject, GameObject.Find ("SnakeHead").transform.position, Quaternion.identity);
 				break;
 			}
 
