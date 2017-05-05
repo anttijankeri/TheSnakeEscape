@@ -87,7 +87,7 @@ public class RoomTeleporter : MonoBehaviour {
 					break;
 				}
 			}
-			Debug.Log ("" + open);
+
 			// save the open status to the correct value
 			open = allPuzzlesUnlocked;
 

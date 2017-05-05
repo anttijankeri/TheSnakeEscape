@@ -7,16 +7,16 @@ using UnityEngine;
 /// </summary>
 public class Bomb : MonoBehaviour {
 	// total timer for the bomb to explode
-	private float timeLeft = 5;
+	private float timeLeft = 4;
 
 	// if the bomb has exploded already
 	private bool exploded = false;
 
 	// how long the explosion effect is shown
-	private float explosionTimeLeft = 1;
+	private float explosionTimeLeft = 0.25f;
 
 	// bomb explosion radius in unity units
-	private float bombRadius = 5;
+	private float bombRadius = 1.2f;
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,10 +31,10 @@ public class Bomb : MonoBehaviour {
 				exploded = true;
 
 				// make the explosion happen
-				new Explosion (bombRadius, false, transform.position);
+				new Explosion (bombRadius, true, transform.position);
 
 				// change sprite to explosion
-				GetComponent<SpriteRenderer> ().sprite = (Sprite)Resources.Load ("Sprites/WorldSprites/Bomb_explosion", typeof(Sprite));
+				GetComponent<SpriteRenderer> ().sprite = (Sprite)Resources.Load ("Sprites/WorldSprites/Bomb_explode", typeof(Sprite));
 			}
 		}
 		// bomb has exploded, count down until explosion should disappear
