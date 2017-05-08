@@ -114,6 +114,8 @@ public class GameController : MonoBehaviour {
 		// save the gamecontroller static variable to this script
 		gameController = this;
 
+		playerHealth = 10;
+
 		// save all the UI objects of different kinds from the child-tree
 		timerCanvas = gameObject.transform.GetChild (0).gameObject;
 		timer = timerCanvas.transform.GetChild (1).GetComponent<Text> ();
