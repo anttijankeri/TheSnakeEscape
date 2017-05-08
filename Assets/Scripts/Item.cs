@@ -107,7 +107,7 @@ public class Item {
 			// redbull, increase speed and turnrate
 			case "RedBull":
 				// find the player controlloer and boost it
-				GameObject.Find ("SnakeHead").GetComponent<PlayerController> ().ActivateBoost (2f, 2f, 10);
+				GameObject.Find ("SnakeHead").GetComponent<PlayerController> ().ActivateBoost (1.5f, 1.5f, 15);
 				break;
 
 			// bomb, create a bomb
